@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import * as React from "react";
 import "./App.css";
 import "./Components/BasicSelect";
@@ -30,6 +29,7 @@ function App() {
   const [user, setUser] = React.useState("");
   React.useEffect(() => {
     getUserData(user, chartData, setChartData);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (
@@ -71,7 +71,7 @@ function App() {
 
 function getUserData(user, chartData, setChartData) {
   console.log(user);
-  fetch(configData.apiBaseUrl + "/getChartData" + "?user=" + user)
+  fetch(configData.apiBaseUrl + "/getChartData?user=" + user)
   .then((response) => response.json())
   .then((jsonData) => {
     setChartData(jsonData);
