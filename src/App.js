@@ -58,7 +58,7 @@ function App() {
             <p>
               <h3>Games Played Per Side</h3>
               <div>
-                <PieWithOptions data={chartData.gameTypeData} />
+                <PieWithOptions data={chartData.sideData} />
               </div>
             </p>
           </Grid>
