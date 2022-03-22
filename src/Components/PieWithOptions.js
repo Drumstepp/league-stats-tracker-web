@@ -7,7 +7,7 @@ export default class Lane extends Component {
     render() {
 
         return (
-            <Pie options={{radius: "80%"}} data={this.props.data} />
+            <Pie options={{radius: "50%"}} data={this.props.data} />
         )
     }
 }
