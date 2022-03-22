@@ -46,7 +46,7 @@ function App() {
 
       <Box hidden={!user} sx={{ width: "100%" }}>
         <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <p>
               <h3>Games Played Per Side</h3>
               <div>
@@ -54,14 +54,14 @@ function App() {
               </div>
             </p>
           </Grid>
-          {/* <Grid item xs={6}>
+          <Grid item xs={6}>
             <p>
-              <h3>Game Types Played</h3>
+              <h3>Games Played Per Side</h3>
               <div>
                 <PieWithOptions data={chartData.gameTypeData} />
               </div>
             </p>
-          </Grid> */}
+          </Grid>
         </Grid>
       </Box>
       <div hidden={user}>Please select a user from the dropdown!</div>
