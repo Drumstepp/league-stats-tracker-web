@@ -4,6 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import configData from '../config.json'
 
 
 export default function BasicSelect(props) {
@@ -12,11 +13,15 @@ export default function BasicSelect(props) {
     const handleChange = (event) => {
         props.setUser(event.target.value);
     };
-    
     const [userList, setUserList] = React.useState('');
+    const [loading, setLoading] = React.useState('true');
     React.useEffect(() => {
-        // Fetch Here
-        setUserList(['Hockomock', 'Drumstepp', 'Jikan Kama'])
+        fetch(configData.apiBaseUrl + "/getUsers")
+        .then((response) => response.json())
+        .then((jsonData) => {
+          setUserList(jsonData);
+          setLoading(false);
+        })
     }, []);
 
     const menuItems = (() => {
@@ -30,12 +35,13 @@ export default function BasicSelect(props) {
     return (
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">User</InputLabel>
+            <InputLabel id="demo-simple-select-label">{loading ? "Loading..." : "Select User"}</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={props.user}
-              label="User"
+              label={loading ? "Loading..." : "Select User"}
+              disabled={loading}
               onChange={handleChange}
             >
               {/* <MenuItem value={10}>Landon</MenuItem>

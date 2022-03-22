@@ -1,15 +1,15 @@
 import logo from "./logo.svg";
 import * as React from "react";
 import "./App.css";
-import "./BasicSelect";
+import "./Components/BasicSelect";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut, Pie } from "react-chartjs-2";
-import BasicSelect from "./BasicSelect";
+import BasicSelect from "./Components/BasicSelect";
+import PieWithOptions from "./Components/PieWithOptions"
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import configData from './config.json'
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-var setSideData;
 
 function App() {
   const defaultData = {
@@ -44,32 +44,38 @@ function App() {
         <BasicSelect setUser={setUser} user={user} />
       </div>
 
-      <Box sx={{ width: "100%" }}>
+      <Box hidden={!user} sx={{ width: "100%" }}>
         <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <p>
               <h3>Games Played Per Side</h3>
               <div>
-                <Pie data={chartData.sideData} />
+                <PieWithOptions data={chartData.sideData} />
               </div>
             </p>
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <p>
-              <h3>Games Played Per Side</h3>
+              <h3>Game Types Played</h3>
               <div>
-                <Pie data={chartData.sideData} />
+                <PieWithOptions data={chartData.gameTypeData} />
               </div>
             </p>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
+      <div hidden={user}>Please select a user from the dropdown!</div>
     </div>
   );
 }
 
 function getUserData(user, chartData, setChartData) {
   console.log(user);
+  fetch(configData.apiBaseUrl + "/getChartData" + "?user=" + user)
+  .then((response) => response.json())
+  .then((jsonData) => {
+    setChartData(jsonData);
+  })
   setChartData({ test: {}, ...chartData });
 }
 
