@@ -24,6 +24,18 @@ function App() {
         },
       ],
     },
+    gameTypeData: {
+      labels: ["Red", "Blue"],
+      datasets: [
+        {
+          label: "# of Votes",
+          data: [12, 3],
+          backgroundColor: ["rgb(255, 99, 132)", "rgb(100, 60, 255)"],
+          borderColor: ["rgb(255, 99, 132)", "rgb(10, 60, 255)"],
+          borderWidth: 1,
+        },
+      ],
+    },
   };
   const [chartData, setChartData] = React.useState(defaultData);
   const [user, setUser] = React.useState("");
@@ -56,9 +68,9 @@ function App() {
           </Grid>
           <Grid item xs={6}>
             <p>
-              <h3>Games Played Per Side</h3>
+              <h3>Games By Mode Played</h3>
               <div>
-                <PieWithOptions data={chartData.sideData} />
+                <PieWithOptions data={chartData.gameTypeData} />
               </div>
             </p>
           </Grid>
