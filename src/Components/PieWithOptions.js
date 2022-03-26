@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {  Pie } from "react-chartjs-2";
+import {  Doughnut } from "react-chartjs-2";
 
 export default class Lane extends Component {
 
@@ -7,7 +7,7 @@ export default class Lane extends Component {
     render() {
 
         return (
-            <Pie options={{radius: "80%"}} data={this.props.data} />
+            <Doughnut options={{radius: "80%"}} data={this.props.data} />
         )
     }
 }
